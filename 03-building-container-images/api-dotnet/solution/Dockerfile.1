@@ -1,0 +1,9 @@
+# Pin the image version
+# Smaller image, and we are guaranteed that the .NET version does not change in the future.
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine
+
+WORKDIR /app
+
+COPY . .
+
+CMD ["dotnet", "run"]

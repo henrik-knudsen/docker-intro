@@ -1,0 +1,8 @@
+# Starting point
+FROM mcr.microsoft.com/dotnet/sdk
+
+WORKDIR /app
+
+COPY . .
+
+CMD ["dotnet", "run", "--project", "api-dotnet"]

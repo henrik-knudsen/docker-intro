@@ -1,7 +1,9 @@
 using Dapper;
 using Npgsql;
 
-var app = WebApplication.Create(args);
+var builder = WebApplication.CreateBuilder(args);
+
+var app = builder.Build();
 
 app.MapGet("/", () =>
 {

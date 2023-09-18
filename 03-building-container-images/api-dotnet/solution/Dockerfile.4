@@ -1,0 +1,25 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine as build
+
+WORKDIR /app
+
+COPY api-dotnet.csproj .
+
+RUN dotnet restore
+
+COPY . .
+
+RUN dotnet publish -o /app/publish
+
+
+# Introduce a separate build-stage for our production target
+#   We do not need the sdk (the build target handles compiling the application)
+#   and we can therefore use the smaller /aspnet/ version of the image.
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine AS final
+
+WORKDIR /app
+
+ENV ASPNETCORE_URLS http://*:5181
+
+COPY --from=build /app/publish .
+
+CMD ["./api-dotnet"]

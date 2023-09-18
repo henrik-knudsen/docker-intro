@@ -22,7 +22,7 @@ export default defineConfig({
         secure: false,
       },
       '/api/dotnet': {
-        target: 'https://localhost:7199',
+        target: 'https://localhost:5181',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/dotnet/, ''),
         secure: false,

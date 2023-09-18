@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine
+
+ENV ASPNETCORE_URLS http://*:5181
+
+WORKDIR /app
+
+# Initially just copy the csproj file (specifying our dependencies)
+COPY api-dotnet.csproj .
+# Run dotnet restore first, downloading any dependencies. Dependencies change at a much slower pace
+#   than our own code. Therefore, it makes sense to do it in a separate step to take advantage of
+#   caching.
+RUN dotnet restore
+
+COPY . .
+
+RUN dotnet publish -o .
+
+CMD ["./api-dotnet"]

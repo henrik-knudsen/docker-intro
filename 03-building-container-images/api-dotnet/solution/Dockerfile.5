@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine as build
+
+WORKDIR /app
+
+COPY api-dotnet.csproj .
+
+RUN dotnet restore
+
+COPY . .
+
+# Ensure to compile the application in release mode - optimizes the application bytecode.
+RUN dotnet publish -c Release -o /app/publish
+
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine AS final
+
+WORKDIR /app
+
+ENV ASPNETCORE_URLS http://*:5181
+
+COPY --from=build /app/publish .
+
+# Document the port number we expect to listen on
+EXPOSE 5181
+
+CMD ["./api-dotnet"]

@@ -1,26 +1,9 @@
 services:
-  client-react-vite:
-    image: client-react-vite
-    build:
-      context: ../02-demo-web-application/client-react/
-      dockerfile: ../../03-building-container-imagesclient-react/Dockerfile.3
-    init: true
-    volumes:
-      - ./client-react/vite.config.js:/usr/src/app/vite.config.js
-    networks:
-      - frontend
-    ports:
-      - 5173:5173
-
   client-react-nginx:
-    labels:
-      shipyard.primary-route: true
-      shipyard.route: '/'
     image: client-react-nginx
     build:
       context: ../02-demo-web-application/client-react/
-      dockerfile: ../../03-building-container-imagesclient-react/Dockerfile.5
-    init: true
+      dockerfile: ../../03-building-container-images/client-react/solution/Dockerfile.5
     networks:
       - frontend
     ports:
@@ -28,14 +11,10 @@ services:
     restart: unless-stopped
 
   api-node:
-    labels:
-      shipyard.route: '/api/node/'
-      shipyard.route.rewrite: true
     image: api-node
     build:
       context: ../02-demo-web-application/api-node/
-      dockerfile: ../../03-building-container-imagesapi-node/Dockerfile.7
-    init: true
+      dockerfile: ../../03-building-container-images/api-node/solution/Dockerfile.7
     depends_on:
       - db
     environment:
@@ -48,14 +27,10 @@ services:
     restart: unless-stopped
 
   api-golang:
-    labels:
-      shipyard.route: '/api/golang/'
-      shipyard.route.rewrite: true
     image: api-golang
     build:
       context: ../02-demo-web-application/api-golang/
-      dockerfile: ../../03-building-container-imagesapi-golang/Dockerfile.6
-    init: true
+      dockerfile: ../../03-building-container-images/api-golang/solution/Dockerfile.6
     depends_on:
       - db
     environment:
@@ -65,6 +40,22 @@ services:
       - backend
     ports:
       - 8080:8080
+    restart: unless-stopped
+
+  api-dotnet:
+    image: api-dotnet
+    build:
+      context: ../02-demo-web-application/api-dotnet/
+      dockerfile: ../../03-building-container-images/api-dotnet/solution/Dockerfile.5
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=Server=db;Port=5432;User Id=postgres;Password=foobarbaz;Database=postgres
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 5181:5181
     restart: unless-stopped
 
   db:
