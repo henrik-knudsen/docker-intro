@@ -60,18 +60,12 @@ You will notice that each of the run commands has a bunch of options used to ens
 
 - Uses the default docker bridge network
 - Publishing ports (`-p` option) useful to connect to each service individually from host, but only necessary to connect to the frontend
-- Named containers make it easier to reference (e.g. with link), but does require removing them to avoid naming conflict
+- Named containers make it easier to reference, but does require removing them to avoid naming conflict
 - Restart policy allows docker to restart the container (for example if database weren't up yet causing one of the api servers to crash)
 
 ## docker compose
 
 Using docker compose allows encoding all of the logic from the `docker build` and `docker run` commands into a single file. Docker compose also manages naming of the container images and containers, attaching to logs from all the containers at runtime, etc...
-
-The `docker-compose.yml` file and the portion of the Makefile labeled `### DOCKER COMPOSE COMMANDS` shows how you can use docker compose to build and run the services. To build and run them you can execute
-
-```bash
-make compose-up-build
-```
 
 As you can see, this is much simpler than needing to execute all of the individual build/run commands and provides a clear way to specify the entire application stack in a single file!
 

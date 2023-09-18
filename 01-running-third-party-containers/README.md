@@ -22,6 +22,22 @@
   - [D. Improving the Ergonomics](#d-improving-the-ergonomics)
 - [Bonus -- Jessie's talks:](#bonus----jessies-talks)
 
+
+## Hello world
+
+Running whalesay (hello world):
+
+```
+docker run docker/whalesay cowsay "Hello from docker! 🐳"
+```
+
+Running an MSSQL container:
+```
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Password1." -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest
+
+```
+
+
 ## I. Understanding data persistence
 
 When we create a container from a container image, everything in the image is treated as read-only, and there is a new layer overlayed on top that is read/write.
