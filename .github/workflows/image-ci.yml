@@ -16,7 +16,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            heknu589/dockerintro-api-dotnet
+            henrikknudsen859/dockerintro-api-dotnet
           tags: |
             type=raw,value=latest
             type=ref,event=branch
