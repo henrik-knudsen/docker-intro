@@ -26,8 +26,6 @@ Docker Desktop: https://docs.docker.com/get-docker/
 
 Docker Engine: https://get.docker.com/ 
 
-***Note:*** See [02-technology-overview](../02-technology-overview/README.md) for a description of the difference between Docker Desktop and Docker Engine. If you are installing on your development system, you will most likely want Docker Desktop.
-
 ---
 
 ### Configuring Docker Desktop
