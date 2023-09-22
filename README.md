@@ -1,17 +1,6 @@
 # docker-intro
 
 
-## TODO
-
-- Add .NET most used alternatives in examples
-- Show integration with vscode etc.
-- 
-
-
-
-
-
-
 Introduction to Docker workshop.
 
 NB: Content is **heavily** based on DevOps Directive Docker Course by Sid Palas:
